@@ -1,0 +1,237 @@
+// /////////////////////////////////// 
+// Responsive.scss
+// Media Query & Clamp Mixins & Functions
+// version 1.2  02/07/2022
+// @LeonLonsdale
+// /////////////////////////////////// 
+
+@use 'sass:math';
+
+
+// //////////////////////////////
+// SET BASE BREAKPOINT VALUES
+// //////////////////////////////
+
+$xs: 375;
+$sm: 480;
+$md: 768;
+$lg: 1024;
+$xl: 1200;
+$xxl: 1201;
+
+// //////////////////////////////
+// CONVERT PX TO REM/EM
+// Assumes font size reset to 62.5%
+// //////////////////////////////
+
+@function convertPX($px, $type) {
+
+    @if $type==em {
+        $toem: math.div($px, 16);
+        @return $toem * 1em;
+    }
+
+    @else if $type==rem {
+        $torem: math.div($px, 10);
+        @return $torem;
+    }
+}
+
+// //////////////////////////////
+// SET BREAKPOINT MAP
+// //////////////////////////////
+
+$breakpoints: ("xs": ("min": convertPX($xs, em),
+        "max": convertPX($xs - 0.2, em),
+        "range": convertPX($sm - 0.2, em),
+        "rem": convertPX($xs, rem),
+    ),
+    "sm": ("min": convertPX($sm, em),
+        "max": convertPX($sm - 0.2, em),
+        "range": convertPX($md - 0.2, em),
+        "rem": convertPX($sm, rem),
+    ),
+    "md": ("min": convertPX($md, em),
+        "max": convertPX($md - 0.2, em),
+        "range": convertPX($lg - 0.2, em),
+        "rem": convertPX($md, rem),
+    ),
+    "lg": ("min": convertPX($lg, em),
+        "max": convertPX($lg - 0.2, em),
+        "range": convertPX($xl - 0.2, em),
+        "rem": convertPX($lg, rem),
+    ),
+    "xl": ("min": convertPX($xl, em),
+        "max": convertPX($xl - 0.2, em),
+        'range': convertPX($xxl - 0.2, em),
+        "rem": convertPX($xl, rem),
+    ),
+    "xxl": ('min': convertPX($xxl, em),
+        "max": convertPX($xxl - 0.2, em),
+        'rem': convertPX($xxl, rem),
+    ));
+
+// //////////////////////////////
+// 
+// //////////////////////////////
+
+@mixin breakpoint($breakpoint, $type: "min") {
+
+    // CHECK MAP FOR BREAKPOINT
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-val: map-get($breakpoints, $breakpoint);
+        $breakpoint-min: map-get($breakpoint-val, "min");
+        $breakpoint-max: map-get($breakpoint-val, "max");
+        $breakpoint-range: map-get($breakpoint-val, "range");
+
+        // CHECK BREAKPOINT TYPE
+
+        @if $type=="min" {
+            @media only screen and (min-width: $breakpoint-min) {
+                @content;
+            }
+        }
+
+        @else if $type=="max" {
+            @media only screen and (max-width: $breakpoint-max) {
+                @content;
+            }
+        }
+
+        @else {
+            @if $breakpoint=="xxl" {
+                @media only screen and (min-width: $breakpoint-min) {
+                    @content;
+                }
+            }
+
+            @else {
+                @media only screen and (min-width: $breakpoint-min) and (max-width: $breakpoint-range) {
+                    @content;
+                }
+            }
+        }
+    }
+
+    // IF NO MAP, THEN USE CUSTOM - MIN OR MAX ONLY, NOT BOTH
+
+    @else {
+        @if $type=="min" {
+            @media only screen and (min-width: convertPX($breakpoint, em)) {
+                @content;
+            }
+        }
+
+        @else {
+            @media only screen and (max-width: convertPX($breakpoint, em)) {
+                @content;
+            }
+        }
+    }
+}
+
+// //////////////////////////////
+// RESPONSIVE CLAMPS
+// //////////////////////////////
+
+@mixin getclamp($property, $minsize, $maxsize, $minwidth: xs, $maxwidth: xxl) {
+
+    @if map-has-key($breakpoints, $minwidth) {
+        @if map-has-key($breakpoints, $maxwidth) {
+            $minwidth-values: map-get($breakpoints, $minwidth);
+            $maxwidth-values: map-get($breakpoints, $maxwidth);
+            $minw: map-get($minwidth-values, rem);
+            $maxw: map-get($maxwidth-values, rem);
+            // calculatae slope
+            $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+            // calculate Y intersect
+            $yint: (0 - $minw) * $slope+$minsize;
+
+            #{$property}: clamp($minsize * 1rem,
+                    ($yint * 1rem) + ($slope * 100vw),
+                    $maxsize * 1rem);
+        }
+
+        @else {
+            $minwidth-values: map-get($breakpoints, $minwidth);
+            $minw: map-get($minwidth-values, rem);
+            $maxw: convertPX($maxwidth, rem);
+            // calculatae slope
+            $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+            // calculate Y intersect
+            $yint: (0 - $minw) * $slope+$minsize;
+
+            #{$property}: clamp($minsize * 1rem,
+                    ($yint * 1rem) + ($slope * 100vw),
+                    $maxsize * 1rem);
+        }
+    }
+
+    @else {
+        $minw: convertPX($minwidth, rem);
+        $maxw: convertPX($maxwidth, rem);
+        // calculatae slope
+        $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+        // calculate Y intersect
+        $yint: (0 - $minw) * $slope+$minsize;
+
+        #{$property}: clamp($minsize * 1rem,
+                ($yint * 1rem) + ($slope * 100vw),
+                $maxsize * 1rem);
+    }
+}
+
+@function insertClamp($minsize, $maxsize, $minwidth, $maxwidth) {
+    @if map-has-key($breakpoints, $minwidth) {
+        @if map-has-key($breakpoints, $maxwidth) {
+            $minwidth-values: map-get($breakpoints, $minwidth);
+            $maxwidth-values: map-get($breakpoints, $maxwidth);
+            $minw: map-get($minwidth-values, rem);
+            $maxw: map-get($maxwidth-values, rem);
+            // calculatae slope
+            $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+            // calculate Y intersect
+            $yint: (0 - $minw) * $slope+$minsize;
+
+            $clampmin: $minsize * 1rem;
+            $clampgrow1: $yint * 1rem;
+            $clampgrow2: $slope * 100vw;
+            $clampmax: $maxsize * 1rem;
+
+            @return clamp(#{$clampmin}, #{$clampgrow1} + #{$clampgrow2}, #{$clampmax});
+        }
+
+        @else {
+            $minwidth-values: map-get($breakpoints, $minwidth);
+            $minw: map-get($minwidth-values, rem);
+            $maxw: convertPX($maxwidth, rem);
+            // calculatae slope
+            $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+            // calculate Y intersect
+            $yint: (0 - $minw) * $slope+$minsize;
+
+            $clampmin: $minsize * 1rem;
+            $clampgrow1: $yint * 1rem;
+            $clampgrow2: $slope * 100vw;
+            $clampmax: $maxsize * 1rem;
+
+            @return clamp(#{$clampmin}, #{$clampgrow1} + #{$clampgrow2}, #{$clampmax});
+        }
+    }
+
+    @else {
+        $minw: convertPX($minwidth, rem);
+        $maxw: convertPX($maxwidth, rem);
+        // calculatae slope
+        $slope: math.div(($maxsize - $minsize), ($maxw - $minw));
+        // calculate Y intersect
+        $yint: (0 - $minw) * $slope+$minsize;
+
+        $clampmin: $minsize * 1rem;
+        $clampgrow1: $yint * 1rem;
+        $clampgrow2: $slope * 100vw;
+        $clampmax: $maxsize * 1rem;
+
+        @return clamp(#{$clampmin}, #{$clampgrow1} + #{$clampgrow2}, #{$clampmax});
+    }
+}

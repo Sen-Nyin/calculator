@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto+Mono&display=swap");
+*:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+button {
+  cursor: revert;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input,
+textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+textarea {
+  white-space: revert;
+}
+
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+::placeholder {
+  color: unset;
+}
+
+:where([hidden]) {
+  display: none;
+}
+
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  line-break: after-white-space;
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+:root {
+  font-size: 62.5%;
+  --color-white: white;
+  --color-warning: #ff3f34;
+  --color-operator: #ffff66;
+  --color-number: lightyellow;
+  --color-other-button: #f38630;
+  --color-calculator: #666;
+  --color-brand: white;
+  --color-solar: brown;
+  --color-display: white;
+  --color-shading: 3px solid rgba(black, 0.3);
+  --font-buttons: "Poppins", sans-serif;
+  --font-display: "Roboto Mono", monospace;
+}
+
+body {
+  font-family: var(--font-buttons);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.calculator {
+  width: 40rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-calculator);
+  border-right: 5px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+}
+.calculator__form {
+  margin-bottom: 1.5rem;
+}
+.calculator__display {
+  font-family: var(--font-display);
+  width: 100%;
+  height: 8rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-display);
+  font-size: 6rem;
+  text-align: right;
+  border-top: 3px solid rgba(0, 0, 0, 0.3);
+  border-left: 3px solid rgba(0, 0, 0, 0.3);
+}
+.calculator__solar {
+  height: 4rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.calculator__solar-panel {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+.calculator__solar-panel-part {
+  height: 4rem;
+  width: 4rem;
+  background-color: var(--color-solar);
+}
+.calculator__solar-panel-part:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+.calculator__brand {
+  font-size: 3rem;
+  margin-right: auto;
+  color: var(--color-brand);
+}
+.calculator__keypad {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: "AC AC perc div" "seven eight nine mult" "four five six min" "one two three plus" "zero dec equal equal";
+}
+
+.btn {
+  padding: 1rem;
+  display: block;
+  border-radius: 0.8rem;
+  text-align: center;
+  font-size: 3rem;
+  background-color: var(--color-number);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+  border-right: 3px solid rgba(0, 0, 0, 0.3);
+}
+.btn:active {
+  border-top: 3px solid rgba(0, 0, 0, 0.3);
+  border-left: 3px solid rgba(0, 0, 0, 0.3);
+  border-bottom: none;
+  border-right: none;
+}
+.btn__div, .btn__plus, .btn__min, .btn__mult, .btn__equal {
+  background-color: var(--color-operator);
+}
+.btn__dec, .btn__perc {
+  background-color: var(--color-other-button);
+}
+.btn__ac {
+  grid-area: AC;
+  background-color: var(--color-warning);
+  color: var(--color-white);
+}
+.btn__perc {
+  grid-area: perc;
+}
+.btn__div {
+  grid-area: div;
+}
+.btn__seven {
+  grid-area: seven;
+}
+.btn__eight {
+  grid-area: eight;
+}
+.btn__nine {
+  grid-area: nine;
+}
+.btn__mult {
+  grid-area: mult;
+}
+.btn__four {
+  grid-area: four;
+}
+.btn__five {
+  grid-area: five;
+}
+.btn__six {
+  grid-area: six;
+}
+.btn__min {
+  grid-area: min;
+}
+.btn__one {
+  grid-area: one;
+}
+.btn__two {
+  grid-area: two;
+}
+.btn__three {
+  grid-area: three;
+}
+.btn__plus {
+  grid-area: plus;
+}
+.btn__zero {
+  grid-area: zero;
+}
+.btn__dec {
+  grid-area: dec;
+}
+.btn__equal {
+  grid-area: equal;
+}/*# sourceMappingURL=main.css.map */
