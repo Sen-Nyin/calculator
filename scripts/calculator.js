@@ -68,7 +68,7 @@ DIGITS.forEach((button) =>
       setCurrentNumberText("");
       equalsLastPressed = false;
     }
-    DISPLAY_MAIN.textContent += Number(this.textContent.trim());
+    DISPLAY_MAIN.textContent += this.textContent.trim();
     currentNumber = getCurrentNum();
   })
 );
