@@ -89,7 +89,10 @@ EQUALS.addEventListener("click", () => {
   currOperator = "";
 });
 
-PI_BTN.addEventListener("click", () => setCurrentNumberText(PI));
+PI_BTN.addEventListener("click", () => {
+  setCurrentNumberText(PI);
+  currentNumber = PI;
+});
 
 SQUARED.addEventListener("click", () => {
   setCurrentNumberText(DISPLAY_MAIN.textContent ** 2);
