@@ -106,11 +106,19 @@ body {
   width: 100%;
   height: 8rem;
   border-radius: 0.5rem;
+  padding: 0.5rem;
   background-color: var(--color-display);
-  font-size: 6rem;
-  text-align: right;
   border-top: 3px solid rgba(0, 0, 0, 0.3);
   border-left: 3px solid rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-rows: 33% 66%;
+}
+.calculator__display-top {
+  font-size: 1.2rem;
+}
+.calculator__display-bottom {
+  font-size: 4rem;
+  text-align: right;
 }
 .calculator__solar {
   height: 4rem;
@@ -146,7 +154,11 @@ body {
   gap: 1.5rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: "AC AC perc div" "seven eight nine mult" "four five six min" "one two three plus" "zero dec equal equal";
+  grid-template-areas: "AC AC del perc" "sqrd sqrt pi div" "seven eight nine mult" "four five six min" "one two three plus" "zero dec equal equal";
+}
+
+.digit {
+  background-color: var(--color-number);
 }
 
 .btn {
@@ -155,7 +167,6 @@ body {
   border-radius: 0.8rem;
   text-align: center;
   font-size: 3rem;
-  background-color: var(--color-number);
   border-bottom: 3px solid rgba(0, 0, 0, 0.3);
   border-right: 3px solid rgba(0, 0, 0, 0.3);
 }
@@ -168,13 +179,27 @@ body {
 .btn__div, .btn__plus, .btn__min, .btn__mult, .btn__equal {
   background-color: var(--color-operator);
 }
-.btn__dec, .btn__perc {
+.btn__dec, .btn__perc, .btn__sqrd, .btn__sqrt, .btn__pi {
   background-color: var(--color-other-button);
+}
+.btn__ac, .btn__del {
+  background-color: var(--color-warning);
+  color: var(--color-white);
 }
 .btn__ac {
   grid-area: AC;
-  background-color: var(--color-warning);
-  color: var(--color-white);
+}
+.btn__del {
+  grid-area: del;
+}
+.btn__sqrd {
+  grid-area: sqrd;
+}
+.btn__sqrt {
+  grid-area: sqrt;
+}
+.btn__pi {
+  grid-area: pi;
 }
 .btn__perc {
   grid-area: perc;

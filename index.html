@@ -12,13 +12,10 @@
   <body>
     <main class="calculator">
       <form action="" class="calculator__form">
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          class="calculator__display"
-        ></textarea>
+        <div class="calculator__display">
+          <div class="calculator__display-top">test</div>
+          <div class="calculator__display-bottom">test</div>
+        </div>
       </form>
       <div class="calculator__solar">
         <p class="calculator__brand">SenNyin</p>
@@ -31,31 +28,36 @@
       </div>
       <div class="calculator__keypad">
         <button class="btn btn__ac" id="AC">AC</button>
+        <button class="btn btn__del" id="del">Del</button>
         <button class="btn btn__perc" id="perc">&percnt;</button>
+        
+        <button class="btn btn__sqrd" id="sqrd">&#x1D465;&sup2;</button>
+        <button class="btn btn__sqrt" id="sqrt">&Sqrt;</button>
+        <button class="btn btn__pi" id="pi">&pi;</button>
         <button class="btn btn__div" id="div">&divide;</button>
 
-        <button class="btn btn__seven" id="seven">7</button>
-        <button class="btn btn__eight" id="eight">8</buttn>
-        <button class="btn btn__nine" id="nine">9</button>
+        <button class="btn btn__seven digit" id="seven">7</button>
+        <button class="btn btn__eight digit" id="eight">8</buttn>
+        <button class="btn btn__nine digit" id="nine">9</button>
         <button class="btn btn__mult" id="mult">&times;</button>
 
-        <button class="btn btn__four" id="four">4</button>
-        <button class="btn btn__five" id="five">5</buttn>
-        <button class="btn btn__six" id="six">6</button>
+        <button class="btn btn__four digit" id="four">4</button>
+        <button class="btn btn__five digit" id="five">5</buttn>
+        <button class="btn btn__six digit" id="six">6</button>
         <button class="btn btn__min" id="min">&minus;</button>
 
-        <button class="btn btn__one" id="one">1</button>
-        <button class="btn btn__two" id="two">2</buttn>
-        <button class="btn btn__three" id="three">3</button>
+        <button class="btn btn__one digit" id="one">1</button>
+        <button class="btn btn__two digit" id="two">2</buttn>
+        <button class="btn btn__three digit" id="three">3</button>
         <button class="btn btn__plus" id="plus">&plus;</button>
 
-        <button class="btn btn__zero" id="zero">0</buttn>
+        <button class="btn btn__zero digit" id="zero">0</buttn>
         <button class="btn btn__dec" id="dec">.</button>
         <button class="btn btn__equal" id="equal">&equals;</button>
 
       </div>
     </main>
 
-    <script src="js/scripts.js"></script>
+    <!-- <script src="js/scripts.js"></script> -->
   </body>
 </html>
