@@ -77,8 +77,8 @@ body {
   border-radius: 1rem;
   padding: 1.5rem;
   background-color: var(--color-calculator);
-  border-right: var(--border-shading-big);
-  border-bottom: var(--border-shading-big);
+  border-right: 5px solid rgba(black, 0.3);
+  border-bottom: 5px solid rgba(black, 0.3);
 
   box-shadow: 0.5rem 0.5rem 1.5rem rgba(black, 0.5);
 
@@ -92,8 +92,8 @@ body {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;
-    border-top: var(--border-shading-small);
-    border-left: var(--border-shading-small);
+    border-top: 3px solid rgba(black, 0.3);
+    border-left: 3px solid rgba(black, 0.3);
     display: grid;
     grid-template-rows: 33% 66%;
 
@@ -122,9 +122,9 @@ body {
         height: 4rem;
         width: 4rem;
         background-color: var(--color-solar);
-        border-top: var(--border-shading-small);
+        border-top: 3px solid rgba(black, 0.3);
         &:first-child {
-          border-left: var(--border-shading-small);
+          border-left: 3px solid rgba(black, 0.3);
         }
         &:not(:last-child) {
           border-right: 1px solid #ddd;
@@ -169,12 +169,12 @@ body {
   text-align: center;
   font-size: var(--font-size-button);
 
-  border-bottom: var(--border-shading-small);
-  border-right: var(--border-shading-small);
+  border-bottom: 3px solid rgba(black, 0.3);
+  border-right: 3px solid rgba(black, 0.3);
 
   &:active {
-    border-top: var(--border-shading-small);
-    border-left: var(--border-shading-small);
+    border-top: 3px solid rgba(black, 0.3);
+    border-left: 3px solid rgba(black, 0.3);
     border-bottom: none;
     border-right: none;
   }
