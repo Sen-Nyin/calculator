@@ -59,9 +59,11 @@ clearAll();
 
 DIGITS.forEach((button) =>
   button.addEventListener("click", function (e) {
+    // stops the 0 from remaining at the front of entered numbers
     if (currentNumber == 0) {
       setCurrentNumberText("");
     }
+    // stop future number inputs appending to the result of the last equals
     if (equalsLastPressed) {
       setCurrentNumberText("");
       equalsLastPressed = false;
@@ -74,13 +76,16 @@ DIGITS.forEach((button) =>
 OPERATORS.forEach((button) =>
   button.addEventListener("click", function (e) {
     if (equalsLastPressed) equalsLastPressed = false;
+    // chain calculations
     if (previousNumber > 0) {
       previousNumber = operate(previousNumber, currOperator, currentNumber);
       setPreviousNumberText(previousNumber);
       currOperator = this.id;
       clearCurrent();
       if (equalsLastPressed) equalsLastPressed = false;
-    } else {
+    }
+    // fresh calculations
+    else {
       currOperator = this.id;
       currentNumber = getCurrentNum();
       previousNumber = currentNumber;
@@ -94,6 +99,9 @@ EQUALS.addEventListener("click", () => {
   setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
   clearPrevious();
   currOperator = "";
+
+  // boolean helps identif if number input immediately follows an equals action
+  // needed to prevent further input appending the result
   equalsLastPressed = true;
 });
 
