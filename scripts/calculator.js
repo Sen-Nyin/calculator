@@ -24,6 +24,7 @@ const PI = 3.14159265359;
 let currOperator = "";
 let previousNumber = 0;
 let currentNumber = 0;
+let equalsLastPressed = false;
 
 // TEXT CONTENT CHANGERS
 ////////////////////////
@@ -61,7 +62,10 @@ DIGITS.forEach((button) =>
     if (currentNumber == 0) {
       setCurrentNumberText("");
     }
-
+    if (equalsLastPressed) {
+      setCurrentNumberText("");
+      equalsLastPressed = false;
+    }
     DISPLAY_MAIN.textContent += Number(this.textContent.trim());
     currentNumber = getCurrentNum();
   })
@@ -69,13 +73,16 @@ DIGITS.forEach((button) =>
 
 OPERATORS.forEach((button) =>
   button.addEventListener("click", function (e) {
+    if (equalsLastPressed) equalsLastPressed = false;
     if (previousNumber > 0) {
       previousNumber = operate(previousNumber, currOperator, currentNumber);
       setPreviousNumberText(previousNumber);
       currOperator = this.id;
       clearCurrent();
+      if (equalsLastPressed) equalsLastPressed = false;
     } else {
       currOperator = this.id;
+      currentNumber = getCurrentNum();
       previousNumber = currentNumber;
       setPreviousNumberText(previousNumber);
       clearCurrent();
@@ -87,6 +94,7 @@ EQUALS.addEventListener("click", () => {
   setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
   clearPrevious();
   currOperator = "";
+  equalsLastPressed = true;
 });
 
 PI_BTN.addEventListener("click", () => {
