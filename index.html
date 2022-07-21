@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <title>Document</title>
+    <title>Calculator | Leon Lonsdale | Odin Project</title>
   </head>
 
   <body>
     <main class="calculator">
       <form action="" class="calculator__form">
         <div class="calculator__display">
-          <div class="calculator__display-top">test</div>
-          <div class="calculator__display-bottom">test</div>
+          <div class="calculator__display-top"><p class="display-top"></p>
+          </div>
+          <div class="calculator__display-bottom"><p class="display-bottom"></p></div>
         </div>
       </form>
       <div class="calculator__solar">
-        <p class="calculator__brand">SenNyin</p>
+        <p class="calculator__brand">Leon</p>
         <div class="calculator__solar-panel">
           <div class="calculator__solar-panel-part"></div>
           <div class="calculator__solar-panel-part"></div>
@@ -34,30 +35,30 @@
         <button class="btn btn__sqrd" id="sqrd">&#x1D465;&sup2;</button>
         <button class="btn btn__sqrt" id="sqrt">&Sqrt;</button>
         <button class="btn btn__pi" id="pi">&pi;</button>
-        <button class="btn btn__div" id="div">&divide;</button>
+        <button class="btn btn__div operator" id="div">&divide;</button>
 
         <button class="btn btn__seven digit" id="seven">7</button>
         <button class="btn btn__eight digit" id="eight">8</buttn>
         <button class="btn btn__nine digit" id="nine">9</button>
-        <button class="btn btn__mult" id="mult">&times;</button>
+        <button class="btn btn__mult operator" id="mult">&times;</button>
 
         <button class="btn btn__four digit" id="four">4</button>
         <button class="btn btn__five digit" id="five">5</buttn>
         <button class="btn btn__six digit" id="six">6</button>
-        <button class="btn btn__min" id="min">&minus;</button>
+        <button class="btn btn__min operator" id="min">&minus;</button>
 
         <button class="btn btn__one digit" id="one">1</button>
         <button class="btn btn__two digit" id="two">2</buttn>
         <button class="btn btn__three digit" id="three">3</button>
-        <button class="btn btn__plus" id="plus">&plus;</button>
+        <button class="btn btn__plus operator" id="plus">&plus;</button>
 
         <button class="btn btn__zero digit" id="zero">0</buttn>
         <button class="btn btn__dec" id="dec">.</button>
-        <button class="btn btn__equal" id="equal">&equals;</button>
+        <button class="btn btn__equal operator" id="equal">&equals;</button>
 
       </div>
     </main>
 
-    <!-- <script src="js/scripts.js"></script> -->
+    <script src="scripts/calculator.js"></script>
   </body>
 </html>
