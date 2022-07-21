@@ -12,6 +12,7 @@
   --color-warning: #ff3f34;
   --color-operator: #ffff66;
   --color-number: lightyellow;
+  --color-equals: lightblue;
   --color-other-button: #f38630;
 
   --color-calculator: #666;
@@ -224,5 +225,6 @@ body {
 
   &__equal {
     grid-area: equal;
+    background: var(--color-equals);
   }
 }
