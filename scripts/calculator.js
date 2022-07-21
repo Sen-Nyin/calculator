@@ -96,10 +96,12 @@ PI_BTN.addEventListener("click", () => {
 
 SQUARED.addEventListener("click", () => {
   setCurrentNumberText(DISPLAY_MAIN.textContent ** 2);
+  currentNumber = getCurrentNum();
 });
 
 SQUARE_ROOT.addEventListener("click", () => {
   setCurrentNumberText(Math.sqrt(DISPLAY_MAIN.textContent));
+  currentNumber = getCurrentNum();
 });
 
 DELETE.addEventListener("click", () => {
