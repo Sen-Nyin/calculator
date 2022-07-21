@@ -6,6 +6,8 @@ This calculator application was built for the final project of The Odin Project 
 
 The calculator allows continuous execution of operations. Entering 5 + 6 \* 12 - 4 / 3 + 7 etc., will continue to work until you give up or hit equals.
 
+Additionally, pressing, for example, 2 then + then = and then repeatedly pressing = will result in 2, 4, 6, 8, 10 etc.,. This functionality works with all operators.
+
 Your previous entry or the current running total is displayed in the top-left corner of the display pane.
 
 The solar panel is just for show and does not actually convert light energy!
