@@ -175,7 +175,11 @@ function operate(num1, operator, num2) {
   } else if (operator === "multiply") {
     answer = Number(num1) * Number(num2);
   } else if (operator === "divide") {
-    answer = Number(num1) / Number(num2);
+    if (Number(num2) === 0) {
+      answer = `LOL DUH!`;
+    } else {
+      answer = Number(num1) / Number(num2);
+    }
   }
 
   if (answer.toString().length > 14) {
