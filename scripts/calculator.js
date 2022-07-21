@@ -119,6 +119,7 @@ CLEAR.addEventListener("click", () => clearAll());
 PERCENT.addEventListener("click", () => {
   currentNumber = getCurrentNum();
   setCurrentNumberText(currentNumber / 100);
+  currentNumber = getCurrentNum();
 });
 
 // OPERATION
