@@ -25,6 +25,7 @@ let currOperator = "";
 let previousNumber = 0;
 let currentNumber = 0;
 let equalsLastPressed = false;
+let equalsCount = 0;
 
 // TEXT CONTENT CHANGERS
 ////////////////////////
@@ -48,6 +49,8 @@ const clearAll = () => {
   currOperator = "";
   previousNumber = "";
   currentNumber = 0;
+  equalsCount = 0;
+  equalsLastPressed = false;
   clearCurrent();
   clearPrevious();
 };
@@ -67,6 +70,9 @@ DIGITS.forEach((button) =>
     if (equalsLastPressed) {
       setCurrentNumberText("");
       equalsLastPressed = false;
+      equalsCount = 0;
+      currOperator = "";
+      clearPrevious();
     }
     DISPLAY_MAIN.textContent += this.textContent.trim();
     currentNumber = getCurrentNum();
@@ -75,14 +81,20 @@ DIGITS.forEach((button) =>
 
 OPERATORS.forEach((button) =>
   button.addEventListener("click", function (e) {
-    if (equalsLastPressed) equalsLastPressed = false;
+    if (equalsLastPressed) {
+      equalsLastPressed = false;
+      equalsCount = 0;
+    }
     // chain calculations
     if (previousNumber > 0) {
       previousNumber = operate(previousNumber, currOperator, currentNumber);
       setPreviousNumberText(previousNumber);
       currOperator = this.id;
       clearCurrent();
-      if (equalsLastPressed) equalsLastPressed = false;
+      if (equalsLastPressed) {
+        equalsLastPressed = false;
+        equalsCount = 0;
+      }
     }
     // fresh calculations
     else {
@@ -96,13 +108,21 @@ OPERATORS.forEach((button) =>
 );
 
 EQUALS.addEventListener("click", () => {
-  setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
-  clearPrevious();
-  currOperator = "";
+  if (equalsLastPressed) {
+    equalsCount++;
+    if (equalsCount === 1) {
+      currentNumber = previousNumber;
+    }
+    setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
+    currentNumber = getCurrentNum();
+  } else {
+    setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
+    // clearPrevious();
 
-  // boolean helps identif if number input immediately follows an equals action
-  // needed to prevent further input appending the result
-  equalsLastPressed = true;
+    // boolean helps identif if number input immediately follows an equals action
+    // needed to prevent further input appending the result
+    equalsLastPressed = true;
+  }
 });
 
 PI_BTN.addEventListener("click", () => {
