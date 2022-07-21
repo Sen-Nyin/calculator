@@ -118,18 +118,13 @@ EQUALS.addEventListener("click", () => {
     if (equalsCount === 1) {
       currentNumber = previousNumber;
     }
-    // setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
-    // currentNumber = getCurrentNum();
-
     currentNumber = operate(previousNumber, currOperator, currentNumber);
     setCurrentNumberText(currentNumber);
   } else {
     currentNumber = operate(previousNumber, currOperator, currentNumber);
     setCurrentNumberText(currentNumber);
-    // BUG
     previousNumber = "";
     setPreviousNumberText(previousNumber);
-
     // setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
     console.log(previousNumber, currentNumber);
     // boolean helps identif if number input immediately follows an equals action
