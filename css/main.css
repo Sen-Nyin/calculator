@@ -74,13 +74,23 @@ meter {
   --color-number: lightyellow;
   --color-equals: lightblue;
   --color-other-button: #f38630;
-  --color-calculator: #666;
-  --color-brand: #999;
-  --color-solar: brown;
-  --color-display: white;
+  --color-calculator: hsl(0, 0%, 40%);
+  --color-brand: hsl(0, 0%, 60%);
+  --color-solar: hsl(0, 59%, 41%);
+  --color-display: hsl(0, 0%, 100%);
+  --color-body-bg: hsl(0, 0%, 93%);
+  --color-twitter: hsl(203, 89%, 53%);
+  --color-odin: hsl(36, 57%, 53%);
   --color-shading: 3px solid rgba(black, 0.3);
+  --border-shading-small: 3px solid rgba(black, 0.3);
+  --border-shading-big: 5px solid rgba(black, 0.3);
   --font-buttons: "Poppins", sans-serif;
   --font-display: "Roboto Mono", monospace;
+  --font-size-title: 3rem;
+  --font-size-display-top: 1.2rem;
+  --font-size-display-main: 4rem;
+  --font-size-brand: 3rem;
+  --font-size-button: 3rem;
 }
 
 body {
@@ -88,21 +98,22 @@ body {
   display: grid;
   place-items: center;
   min-height: 100vh;
+  background: var(--color-body-bg);
 }
 
 .title {
-  font-size: 3rem;
+  font-size: var(--font-size-title);
 }
 
 .twitlink:link, .twitlink:visited {
-  color: hsl(203deg, 89%, 53%);
+  color: var(--color-twitter);
 }
 .twitlink:link:hover, .twitlink:visited:hover {
   text-decoration: underline;
 }
 
 .odin:link, .odin:visited {
-  color: hsl(36deg, 57%, 53%);
+  color: var(--color-odin);
 }
 .odin:link:hover, .odin:visited:hover {
   text-decoration: underline;
@@ -113,8 +124,8 @@ body {
   border-radius: 1rem;
   padding: 1.5rem;
   background-color: var(--color-calculator);
-  border-right: 5px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+  border-right: var(--border-shading-big);
+  border-bottom: var(--border-shading-big);
   box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
 }
 .calculator__display {
@@ -127,16 +138,16 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
-  border-top: 3px solid rgba(0, 0, 0, 0.3);
-  border-left: 3px solid rgba(0, 0, 0, 0.3);
+  border-top: var(--border-shading-small);
+  border-left: var(--border-shading-small);
   display: grid;
   grid-template-rows: 33% 66%;
 }
 .calculator__display-top {
-  font-size: 1.2rem;
+  font-size: var(--font-size-display-top);
 }
 .calculator__display-bottom {
-  font-size: 4rem;
+  font-size: var(--font-size-display-main);
   text-align: right;
   overflow: hidden;
 }
@@ -161,16 +172,16 @@ body {
   height: 4rem;
   width: 4rem;
   background-color: var(--color-solar);
-  border-top: 3px solid rgba(0, 0, 0, 0.3);
+  border-top: var(--border-shading-small);
 }
 .calculator__solar-panel-part:first-child {
-  border-left: 3px solid rgba(0, 0, 0, 0.3);
+  border-left: var(--border-shading-small);
 }
 .calculator__solar-panel-part:not(:last-child) {
   border-right: 1px solid #ddd;
 }
 .calculator__brand {
-  font-size: 3rem;
+  font-size: var(--font-size-brand);
   margin-right: auto;
   color: var(--color-brand);
 }
@@ -195,13 +206,13 @@ body {
   display: block;
   border-radius: 0.8rem;
   text-align: center;
-  font-size: 3rem;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
-  border-right: 3px solid rgba(0, 0, 0, 0.3);
+  font-size: var(--font-size-button);
+  border-bottom: var(--border-shading-small);
+  border-right: var(--border-shading-small);
 }
 .btn:active {
-  border-top: 3px solid rgba(0, 0, 0, 0.3);
-  border-left: 3px solid rgba(0, 0, 0, 0.3);
+  border-top: var(--border-shading-small);
+  border-left: var(--border-shading-small);
   border-bottom: none;
   border-right: none;
 }
