@@ -78,9 +78,14 @@ DIGITS.forEach((button) =>
     currentNumber = getCurrentNum();
   })
 );
-
+DOT.addEventListener("click", () => {
+  if (!DISPLAY_MAIN.textContent.includes(".")) {
+    DISPLAY_MAIN.textContent += ".";
+  }
+});
 OPERATORS.forEach((button) =>
   button.addEventListener("click", function (e) {
+    this.disabled = false;
     if (equalsLastPressed) {
       equalsLastPressed = false;
       equalsCount = 0;
@@ -172,5 +177,10 @@ function operate(num1, operator, num2) {
   } else if (operator === "divide") {
     answer = Number(num1) / Number(num2);
   }
-  return answer;
+
+  if (answer.toString().length > 14) {
+    return answer.toString().substring(0, 14);
+  } else {
+    return answer;
+  }
 }
