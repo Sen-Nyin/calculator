@@ -45,12 +45,16 @@ const clearPrevious = () => {
   previousNumber = "";
 };
 
+const resetEqualsTracking = () => {
+  equalsLastPressed = false;
+  equalsCount = 0;
+};
+
 const clearAll = () => {
   currOperator = "";
   previousNumber = "";
   currentNumber = 0;
-  equalsCount = 0;
-  equalsLastPressed = false;
+  resetEqualsTracking();
   clearCurrent();
   clearPrevious();
 };
@@ -62,33 +66,34 @@ clearAll();
 
 DIGITS.forEach((button) =>
   button.addEventListener("click", function (e) {
-    // stops the 0 from remaining at the front of entered numbers
-    if (currentNumber == 0) {
-      setCurrentNumberText("");
-    }
     // stop future number inputs appending to the result of the last equals
     if (equalsLastPressed) {
       setCurrentNumberText("");
-      equalsLastPressed = false;
-      equalsCount = 0;
+      resetEqualsTracking();
       currOperator = "";
       clearPrevious();
     }
-    DISPLAY_MAIN.textContent += this.textContent.trim();
-    currentNumber = getCurrentNum();
+    // Stop inputs appending to 0
+    if (currentNumber == 0) {
+      currentNumber = this.textContent.trim();
+    } else {
+      currentNumber += this.textContent.trim();
+    }
+    setCurrentNumberText(currentNumber);
   })
 );
+
+// Handle dot inputs
 DOT.addEventListener("click", () => {
   if (!DISPLAY_MAIN.textContent.includes(".")) {
     DISPLAY_MAIN.textContent += ".";
   }
 });
+
 OPERATORS.forEach((button) =>
   button.addEventListener("click", function (e) {
-    this.disabled = false;
     if (equalsLastPressed) {
-      equalsLastPressed = false;
-      equalsCount = 0;
+      resetEqualsTracking();
     }
     // chain calculations
     if (previousNumber > 0) {
@@ -96,15 +101,10 @@ OPERATORS.forEach((button) =>
       setPreviousNumberText(previousNumber);
       currOperator = this.id;
       clearCurrent();
-      if (equalsLastPressed) {
-        equalsLastPressed = false;
-        equalsCount = 0;
-      }
     }
     // fresh calculations
     else {
       currOperator = this.id;
-      currentNumber = getCurrentNum();
       previousNumber = currentNumber;
       setPreviousNumberText(previousNumber);
       clearCurrent();
@@ -118,12 +118,20 @@ EQUALS.addEventListener("click", () => {
     if (equalsCount === 1) {
       currentNumber = previousNumber;
     }
-    setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
-    currentNumber = getCurrentNum();
-  } else {
-    setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
-    // clearPrevious();
+    // setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
+    // currentNumber = getCurrentNum();
 
+    currentNumber = operate(previousNumber, currOperator, currentNumber);
+    setCurrentNumberText(currentNumber);
+  } else {
+    currentNumber = operate(previousNumber, currOperator, currentNumber);
+    setCurrentNumberText(currentNumber);
+    // BUG
+    previousNumber = "";
+    setPreviousNumberText(previousNumber);
+
+    // setCurrentNumberText(operate(previousNumber, currOperator, currentNumber));
+    console.log(previousNumber, currentNumber);
     // boolean helps identif if number input immediately follows an equals action
     // needed to prevent further input appending the result
     equalsLastPressed = true;
@@ -136,13 +144,13 @@ PI_BTN.addEventListener("click", () => {
 });
 
 SQUARED.addEventListener("click", () => {
-  setCurrentNumberText(DISPLAY_MAIN.textContent ** 2);
-  currentNumber = getCurrentNum();
+  currentNumber = DISPLAY_MAIN.textContent ** 2;
+  setCurrentNumberText(currentNumber);
 });
 
 SQUARE_ROOT.addEventListener("click", () => {
-  setCurrentNumberText(Math.sqrt(DISPLAY_MAIN.textContent));
-  currentNumber = getCurrentNum();
+  currentNumber = Math.sqrt(DISPLAY_MAIN.textContent);
+  setCurrentNumberText(currentNumber);
 });
 
 DELETE.addEventListener("click", () => {
@@ -157,6 +165,7 @@ DELETE.addEventListener("click", () => {
 
 CLEAR.addEventListener("click", () => clearAll());
 
+// TODO make this cleaner
 PERCENT.addEventListener("click", () => {
   currentNumber = getCurrentNum();
   setCurrentNumberText(currentNumber / 100);
