@@ -75,7 +75,7 @@ meter {
   --color-equals: lightblue;
   --color-other-button: #f38630;
   --color-calculator: #666;
-  --color-brand: white;
+  --color-brand: #999;
   --color-solar: brown;
   --color-display: white;
   --color-shading: 3px solid rgba(black, 0.3);
@@ -88,6 +88,24 @@ body {
   display: grid;
   place-items: center;
   min-height: 100vh;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.twitlink:link, .twitlink:visited {
+  color: hsl(203deg, 89%, 53%);
+}
+.twitlink:link:hover, .twitlink:visited:hover {
+  text-decoration: underline;
+}
+
+.odin:link, .odin:visited {
+  color: hsl(36deg, 57%, 53%);
+}
+.odin:link:hover, .odin:visited:hover {
+  text-decoration: underline;
 }
 
 .calculator {

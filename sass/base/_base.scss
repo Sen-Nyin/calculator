@@ -16,7 +16,7 @@
   --color-other-button: #f38630;
 
   --color-calculator: #666;
-  --color-brand: white;
+  --color-brand: #999;
   --color-solar: brown;
   --color-display: white;
 
@@ -35,6 +35,29 @@
 body {
   font-family: var(--font-buttons);
   @include a.bodyCenter();
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.twitlink {
+  &:link,
+  &:visited {
+    color: hsl(203, 89%, 53%);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+.odin {
+  &:link,
+  &:visited {
+    color: hsl(36, 57%, 53%);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .calculator {
