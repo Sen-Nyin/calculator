@@ -9,16 +9,26 @@
     <title>Calculator | Leon Lonsdale | Odin Project</title>
   </head>
   <header>
-    <h1 class="title">Calculator by <a href="https://www.twitter.com/LeonLonsdale" class="twitlink">@LeonLonsdale</a> for <a href="https://www.theodinproject.com" class="odin">The Odin Project</a></h1>
+    <h1 class="title">
+      Calculator by
+      <a href="https://www.twitter.com/LeonLonsdale" class="twitlink"
+        >@LeonLonsdale</a
+      >
+      for
+      <a href="https://www.theodinproject.com" class="odin">The Odin Project</a>
+    </h1>
   </header>
 
   <body>
     <main class="calculator">
       <form action="" class="calculator__form">
         <div class="calculator__display">
-          <div class="calculator__display-top"><p class="display-top"></p>
+          <div class="calculator__display-top">
+            <p class="display-top" id="stage"></p>
           </div>
-          <div class="calculator__display-bottom"><p class="display-bottom"></p></div>
+          <div class="calculator__display-bottom">
+            <p class="display-bottom" id="operation"></p>
+          </div>
         </div>
       </form>
       <div class="calculator__solar">
@@ -31,34 +41,33 @@
         </div>
       </div>
       <div class="calculator__keypad">
-        <button class="btn btn__ac" id="AC">AC</button>
+        <button class="btn btn__ac" id="ac">AC</button>
         <button class="btn btn__del" id="del">Del</button>
         <button class="btn btn__perc" id="perc">&percnt;</button>
-        
+
         <button class="btn btn__sqrd" id="sqrd">&#x1D465;&sup2;</button>
         <button class="btn btn__sqrt" id="sqrt">&Sqrt;</button>
         <button class="btn btn__pi" id="pi">&pi;</button>
         <button class="btn btn__div operator" id="divide">&divide;</button>
 
         <button class="btn btn__seven digit" id="seven">7</button>
-        <button class="btn btn__eight digit" id="eight">8</buttn>
+        <button class="btn btn__eight digit" id="eight">8</button>
         <button class="btn btn__nine digit" id="nine">9</button>
         <button class="btn btn__mult operator" id="multiply">&times;</button>
 
         <button class="btn btn__four digit" id="four">4</button>
-        <button class="btn btn__five digit" id="five">5</buttn>
+        <button class="btn btn__five digit" id="five">5</button>
         <button class="btn btn__six digit" id="six">6</button>
         <button class="btn btn__min operator" id="minus">&minus;</button>
 
         <button class="btn btn__one digit" id="one">1</button>
-        <button class="btn btn__two digit" id="two">2</buttn>
+        <button class="btn btn__two digit" id="two">2</button>
         <button class="btn btn__three digit" id="three">3</button>
         <button class="btn btn__plus operator" id="plus">&plus;</button>
 
-        <button class="btn btn__zero digit" id="zero">0</buttn>
+        <button class="btn btn__zero digit" id="zero">0</button>
         <button class="btn btn__dec" id="dec">.</button>
         <button class="btn btn__equal" id="equals">&equals;</button>
-
       </div>
     </main>
 

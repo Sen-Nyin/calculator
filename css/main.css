@@ -99,6 +99,7 @@ body {
   place-items: center;
   min-height: 100vh;
   background: var(--color-body-bg);
+  text-align: center;
 }
 
 .title {
@@ -145,6 +146,7 @@ body {
 }
 .calculator__display-top {
   font-size: var(--font-size-display-top);
+  text-align: left;
 }
 .calculator__display-bottom {
   font-size: var(--font-size-display-main);
