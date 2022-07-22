@@ -39,10 +39,6 @@
   --font-size-button: 3rem;
 }
 
-* {
-  //   border: 1px solid red;
-}
-
 body {
   font-family: var(--font-buttons);
   @include a.bodyCenter();
