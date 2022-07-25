@@ -8,12 +8,11 @@ const calculator = {
   previousNumber: 0,
   operator: null,
   result: null,
-  stageText: "",
   pi: function () {
     this.currentNumber = 3.141592653589;
   },
   reset: false,
-  clearMainDisplay: false,
+  shouldReset: false,
   operatorClick: function (operator) {
     if (!this.operator) {
       this.operator = operator;
@@ -25,7 +24,7 @@ const calculator = {
       this.operator = operator;
       this.result = null;
       this.currentNumber = 0;
-      this.clearMainDisplay = false;
+      this.shouldReset = false;
     }
   },
   operatorSymbol: function () {
@@ -35,9 +34,8 @@ const calculator = {
     if (this.operator === "plus") return "+";
   },
   addDigit: function (digit) {
-    if (this.clearMainDisplay) {
+    if (this.shouldReset) {
       this.clear();
-      this.clearMainDisplay = false;
     }
     if (this.currentNumber === 0) {
       this.currentNumber = "";
@@ -58,11 +56,15 @@ const calculator = {
         !this.previousNumber ? this.currentNumber : this.previousNumber
       } ${this.operator ? this.operatorSymbol() : ""}`;
       operatingScreen.textContent = this.currentNumber;
-    } else if (this.reset) {
-      stagingScreen.textContent = "";
-      this.reset = false;
-    } else if (this.result || this.result === 0) {
-      stagingScreen.textContent = this.stageText;
+    }
+    // else if (this.reset) {
+    //   stagingScreen.textContent = "";
+    //   this.reset = false;
+    // }
+    else if (this.result || this.result === 0) {
+      stagingScreen.textContent = `${
+        this.previousNumber
+      } ${this.operatorSymbol()} ${this.currentNumber} =`;
       operatingScreen.textContent = this.roundResult(this.result);
     }
   },
@@ -71,9 +73,9 @@ const calculator = {
     this.previousNumber = 0;
     this.operator = null;
     this.result = null;
-    this.reset = true;
-    this.stageText = "";
-    this.display();
+    // this.reset = true;
+    this.shouldReset = false;
+    // this.display();
   },
   equals: function () {
     if (
@@ -83,6 +85,7 @@ const calculator = {
     ) {
       this.currentNumber = "Hello 😉";
     } else {
+      this.shouldReset = true;
       if (this.operator === "plus") {
         this.result = Number(this.currentNumber) + Number(this.previousNumber);
       } else if (this.operator === "minus") {
@@ -95,10 +98,6 @@ const calculator = {
             ? "🤡"
             : this.previousNumber / this.currentNumber;
       }
-      this.stageText = `${this.previousNumber} ${this.operatorSymbol()} ${
-        this.currentNumber
-      } =`;
-      this.clearMainDisplay = true;
     }
   },
   percent: function () {
