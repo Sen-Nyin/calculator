@@ -44,7 +44,9 @@ const calculator = {
   },
   delete: function () {
     this.currentNumber =
-      this.currentNumber.length === 1 ? 0 : this.currentNumber.slice(0, -1);
+      this.currentNumber.toString().length === 1
+        ? 0
+        : this.currentNumber.toString().slice(0, -1);
   },
   point: function () {
     if (this.currentNumber === "") this.currentNumber = 0;
@@ -56,12 +58,7 @@ const calculator = {
         !this.previousNumber ? this.currentNumber : this.previousNumber
       } ${this.operator ? this.operatorSymbol() : ""}`;
       operatingScreen.textContent = this.currentNumber;
-    }
-    // else if (this.reset) {
-    //   stagingScreen.textContent = "";
-    //   this.reset = false;
-    // }
-    else if (this.result || this.result === 0) {
+    } else if (this.result || this.result === 0) {
       stagingScreen.textContent = `${
         this.previousNumber
       } ${this.operatorSymbol()} ${this.currentNumber} =`;
@@ -73,9 +70,7 @@ const calculator = {
     this.previousNumber = 0;
     this.operator = null;
     this.result = null;
-    // this.reset = true;
     this.shouldReset = false;
-    // this.display();
   },
   equals: function () {
     if (
