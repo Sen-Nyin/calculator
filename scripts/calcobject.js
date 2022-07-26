@@ -1,5 +1,10 @@
 "use strict";
 
+///////////////////////////////////////////
+// Calculator Project for The Odin Project
+// Twitter: @LeonLonsdale
+///////////////////////////////////////////
+
 const operatingScreen = document.getElementById("operation");
 const stagingScreen = document.getElementById("stage");
 
@@ -14,11 +19,14 @@ const calculator = {
   reset: false,
   shouldReset: false,
   operatorClick: function (operator) {
+    // First operator
     if (!this.operator) {
       this.operator = operator;
       this.previousNumber = this.currentNumber;
       this.currentNumber = 0;
-    } else {
+    }
+    // Consequtive operations
+    else {
       this.equals();
       this.previousNumber = this.result;
       this.operator = operator;
@@ -34,9 +42,11 @@ const calculator = {
     if (this.operator === "plus") return "+";
   },
   addDigit: function (digit) {
+    // Clear main display if last button was equals
     if (this.shouldReset) {
       this.clear();
     }
+    // Remove 0 if 0 so number does not begin with 0.
     if (this.currentNumber === 0) {
       this.currentNumber = "";
     }
@@ -50,6 +60,7 @@ const calculator = {
   },
   point: function () {
     if (this.currentNumber === "") this.currentNumber = 0;
+    // Limit to 1 decimal point per number
     if (!this.currentNumber.toString().includes(".")) this.currentNumber += ".";
   },
   display: function () {
@@ -73,13 +84,16 @@ const calculator = {
     this.shouldReset = false;
   },
   equals: function () {
+    // easter egg
     if (
       this.currentNumber === "0.7734" &&
       !this.operator &&
       !this.previousNumber
     ) {
       this.currentNumber = "Hello 😉";
-    } else {
+    }
+    // calculations
+    else {
       this.shouldReset = true;
       if (this.operator === "plus") {
         this.result = Number(this.currentNumber) + Number(this.previousNumber);
@@ -90,7 +104,7 @@ const calculator = {
       } else if (this.operator === "divide") {
         this.result =
           this.currentNumber === "0"
-            ? "🤡"
+            ? "🤡" // cannot divide by 0 clown face.
             : this.previousNumber / this.currentNumber;
       }
     }
